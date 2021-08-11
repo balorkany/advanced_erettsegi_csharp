@@ -10,7 +10,7 @@ namespace tesztverseny
     internal class Program
     {
         public static List<Valasz> valaszok = new List<Valasz>();
-        public static string joMegoldas;
+        public static string joValasz;
 
         public static string feladat3_azon;
         public static string feladat3_tipp;
@@ -39,9 +39,84 @@ namespace tesztverseny
             Console.WriteLine("6. Feladat: A versenyzők pontszámának meghatározása");
             Feladat06();
             
+            // 7. Feladat
+            Console.WriteLine("7. Feladat: A verseny legjobbjai:");
+            Feladat07();
+            
+        }
 
-            //Console.WriteLine($"{valaszok[0].azon}, {valaszok[0].tipp}");
-            //Console.WriteLine(joMegoldas);
+        private static int Pontszam(Valasz valasz, string joValasz)
+        {
+            int pontszam = 0;
+
+            for (int i = 0; i < 5; i++)
+            {
+                if (valasz.tipp[i] == joValasz[i])
+                {
+                    pontszam += 3;
+                }
+            }
+                
+            for (int i = 5; i < 10; i++)
+            {
+                if (valasz.tipp[i] == joValasz[i])
+                {
+                    pontszam += 4;
+                }
+            }
+                
+            for (int i = 10; i < 13; i++)
+            {
+                if (valasz.tipp[i] == joValasz[i])
+                {
+                    pontszam += 5;
+                }
+            }
+                
+            if (valasz.tipp[13] == joValasz[13])
+            {
+                pontszam += 6;
+            }
+
+            return pontszam;
+        }
+        
+        private static void Feladat07()
+        {
+            List<int> only_pontok = new List<int>();
+            
+            foreach (var v in valaszok)
+            {
+                int pont = Pontszam(v, joValasz);
+                if (!only_pontok.Contains(pont))
+                {
+                    only_pontok.Add(pont);
+                }
+            }
+
+            only_pontok.Sort();
+            only_pontok.Reverse();
+      
+            for (int i = 0; i < 3; i++)
+            {
+                if (only_pontok.Count > i)
+                {
+                    int kov_pont = only_pontok[i];
+                    List<string> kovik = new List<string>();
+                    foreach (var v in valaszok)
+                    {
+                        if (Pontszam(v, joValasz) == kov_pont)
+                        {
+                            kovik.Add(v.azon);
+                        }
+                    }
+
+                    foreach (var versenyzo in kovik)
+                    {
+                        Console.WriteLine($"{i+1}. díj ({kov_pont}) : {versenyzo}");
+                    }
+                }
+            }
         }
 
         private static void Feladat06()
@@ -50,37 +125,7 @@ namespace tesztverseny
             
             foreach (var v in valaszok)
             {
-                int pontszam = 0;
-
-                for (int i = 0; i < 5; i++)
-                {
-                    if (v.tipp[i] == joMegoldas[i])
-                    {
-                        pontszam += 3;
-                    }
-                }
-                
-                for (int i = 5; i < 10; i++)
-                {
-                    if (v.tipp[i] == joMegoldas[i])
-                    {
-                        pontszam += 4;
-                    }
-                }
-                
-                for (int i = 10; i < 13; i++)
-                {
-                    if (v.tipp[i] == joMegoldas[i])
-                    {
-                        pontszam += 5;
-                    }
-                }
-                
-                if (v.tipp[13] == joMegoldas[13])
-                {
-                    pontszam += 6;
-                }
-
+                int pontszam = Pontszam(v, joValasz);
                 sw.WriteLine($"{v.azon} {pontszam}");
             }
             
@@ -95,7 +140,7 @@ namespace tesztverseny
             int joValaszokSzama = 0;
             foreach (var v in valaszok)
             {
-                if (v.tipp[feladatSorszam] == joMegoldas[feladatSorszam])
+                if (v.tipp[feladatSorszam] == joValasz[feladatSorszam])
                 {
                     joValaszokSzama++;
                 }
@@ -107,9 +152,9 @@ namespace tesztverseny
         private static void Feladat04_v1()
         {
             string megoldasLenyomat = "";
-            for (int ind = 0; ind <  joMegoldas.Length; ind++)
+            for (int ind = 0; ind <  joValasz.Length; ind++)
             {
-                if (joMegoldas[ind] == feladat3_tipp[ind])
+                if (joValasz[ind] == feladat3_tipp[ind])
                 {
                     megoldasLenyomat += '+';
                 }
@@ -119,32 +164,30 @@ namespace tesztverseny
                 }
             }
             
-            Console.WriteLine($"{joMegoldas}    (a helyes megoldás)");
-            Console.WriteLine($"{megoldasLenyomat.ToString()}    (a versenyző helyes válaszai)");
+            Console.WriteLine($"{joValasz}    (a helyes megoldás)");
+            Console.WriteLine($"{megoldasLenyomat}    (a versenyző helyes válaszai)");
         }
 
         private static void Feladat04_v2()
         {
             StringBuilder megoldasLenyomat = new StringBuilder("              ");
-            for (int ind = 0; ind <  joMegoldas.Length; ind++)
+            for (int ind = 0; ind <  joValasz.Length; ind++)
             {
-                if (joMegoldas[ind] == feladat3_tipp[ind])
+                if (joValasz[ind] == feladat3_tipp[ind])
                 {
                     megoldasLenyomat[ind] = '+';
                 }
             }
             
-            Console.WriteLine($"{joMegoldas}    (a helyes megoldás)");
+            Console.WriteLine($"{joValasz}    (a helyes megoldás)");
             Console.WriteLine($"{megoldasLenyomat.ToString()}    (a versenyző helyes válaszai)");
         }
         
         private static void Feladat03()
         {
             Console.Write("A versenyző azonosítója = ");
-            // ToDo: tedd vissza az igazi beolvasást!!!
-            //feladat3_azon = Console.ReadLine(); 
-            feladat3_azon = "AB123";
-
+            feladat3_azon = Console.ReadLine(); 
+            
             foreach (var v in valaszok)
             {
                 if (v.azon == feladat3_azon)
@@ -166,7 +209,7 @@ namespace tesztverseny
             {
                 if (!joMegoldasBeolvasva)
                 {
-                    joMegoldas = line;
+                    joValasz = line;
                     joMegoldasBeolvasva = true;
                 }
                 else
