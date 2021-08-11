@@ -1,0 +1,6 @@
+/home/balorkany/advanced_erettsegi_csharp/2017_maj/tesztverseny/tesztverseny/bin/Debug/tesztverseny.exe
+/home/balorkany/advanced_erettsegi_csharp/2017_maj/tesztverseny/tesztverseny/bin/Debug/tesztverseny.pdb
+/home/balorkany/advanced_erettsegi_csharp/2017_maj/tesztverseny/tesztverseny/obj/Debug/tesztverseny.csprojAssemblyReference.cache
+/home/balorkany/advanced_erettsegi_csharp/2017_maj/tesztverseny/tesztverseny/obj/Debug/tesztverseny.csproj.CoreCompileInputs.cache
+/home/balorkany/advanced_erettsegi_csharp/2017_maj/tesztverseny/tesztverseny/obj/Debug/tesztverseny.exe
+/home/balorkany/advanced_erettsegi_csharp/2017_maj/tesztverseny/tesztverseny/obj/Debug/tesztverseny.pdb
