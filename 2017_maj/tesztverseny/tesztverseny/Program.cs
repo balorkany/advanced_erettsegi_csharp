@@ -20,6 +20,8 @@ namespace tesztverseny
             Console.WriteLine("1. Feladat: Az adatok beolvasása");
             Feladat01();
             
+            
+            
             // 2. Feladat
             Console.WriteLine($"2. Feladat: a vetélkedőn {valaszok.Count} versenyző indult.");
             

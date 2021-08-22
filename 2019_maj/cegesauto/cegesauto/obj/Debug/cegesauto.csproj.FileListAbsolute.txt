@@ -1,0 +1,6 @@
+/home/balorkany/advanced_erettsegi_csharp/2019_maj/cegesauto/cegesauto/bin/Debug/cegesauto.exe
+/home/balorkany/advanced_erettsegi_csharp/2019_maj/cegesauto/cegesauto/bin/Debug/cegesauto.pdb
+/home/balorkany/advanced_erettsegi_csharp/2019_maj/cegesauto/cegesauto/obj/Debug/cegesauto.csprojAssemblyReference.cache
+/home/balorkany/advanced_erettsegi_csharp/2019_maj/cegesauto/cegesauto/obj/Debug/cegesauto.csproj.CoreCompileInputs.cache
+/home/balorkany/advanced_erettsegi_csharp/2019_maj/cegesauto/cegesauto/obj/Debug/cegesauto.exe
+/home/balorkany/advanced_erettsegi_csharp/2019_maj/cegesauto/cegesauto/obj/Debug/cegesauto.pdb
