@@ -1,0 +1,6 @@
+/home/balorkany/advanced_erettsegi_csharp/2007_okt/foci/foci/bin/Debug/foci.exe
+/home/balorkany/advanced_erettsegi_csharp/2007_okt/foci/foci/bin/Debug/foci.pdb
+/home/balorkany/advanced_erettsegi_csharp/2007_okt/foci/foci/obj/Debug/foci.csprojAssemblyReference.cache
+/home/balorkany/advanced_erettsegi_csharp/2007_okt/foci/foci/obj/Debug/foci.csproj.CoreCompileInputs.cache
+/home/balorkany/advanced_erettsegi_csharp/2007_okt/foci/foci/obj/Debug/foci.exe
+/home/balorkany/advanced_erettsegi_csharp/2007_okt/foci/foci/obj/Debug/foci.pdb
