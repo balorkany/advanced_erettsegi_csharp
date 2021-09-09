@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
 using System.Net;
@@ -14,6 +15,9 @@ namespace metjelentes
         {
             //Feladat 1
             Feladat01();
+            
+            Console.WriteLine(taviratok[0].ido);
+            Console.WriteLine(taviratok[0].szelerosseg);
         }
 
         private static void Feladat01()
@@ -24,6 +28,11 @@ namespace metjelentes
             {
                 string[] splittedLine = line.Split(' ');
                 Tavirat tavirat = new Tavirat();
+
+                tavirat.telepules = splittedLine[0];
+                tavirat.ido = $"{splittedLine[1].Substring(0, 2)}:{splittedLine[1].Substring(2,2)}";
+                tavirat.homerseklet = Int32.Parse(splittedLine[3]);
+                tavirat.szelerosseg = Int32.Parse(splittedLine[2].Substring(3,2));
                 
                 // ToDo:
                 // - idő óó:pp formába
