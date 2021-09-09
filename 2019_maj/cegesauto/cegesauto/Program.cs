@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Linq;
+using System.Management.Instrumentation;
 
 namespace cegesauto
 {
@@ -25,26 +26,126 @@ namespace cegesauto
             
             // 4. Feladat
             Console.WriteLine("4. Feladat");
-            //Feladat04();
+            Feladat04();
             
+            // 5. Feladat
+            Console.WriteLine("5. Feladat");
+            Feladat05();
             
+            // 6. Feladat
+            Console.WriteLine("6. Feladat");
+            Feladat06();
             
-            //Console.WriteLine(adatok.Count);
+            // 7. Feladat
+            Console.WriteLine("7. Feladat");
+            Feladat07();
+            
         }
 
-        private static void Feladat04()
+        private static void Feladat07()
+        { 
+            Console.Write("Rendszám: ");
+            string rendszamBe = Console.ReadLine();
+            
+            List<Jegyzek> szurtAdatok = adatok.Where(a => a.Rendszam == rendszamBe).ToList();
+
+            StreamWriter sw = new StreamWriter($"{rendszamBe}_menetlevel.txt");
+
+            string sor = "";
+            int i;
+            for (i = 0; i < szurtAdatok.Count; i++)
+            {
+                var adat = szurtAdatok[i];
+                if (i % 2 == 0)
+                {
+                    sor = $"{adat.SzemAz} \t {adat.Nap}. {adat.Ora}:{adat.Perc} \t {adat.Km} km \t";
+                }
+                else
+                {
+                    sor += $"{adat.Nap}. {adat.Ora}:{adat.Perc} \t {adat.Km} km";
+                    sw.WriteLine(sor);
+                }
+
+            }
+
+            if (i % 2 == 1)
+            {
+                sw.WriteLine(sor);
+            }
+            
+            sw.Close();
+            
+            Console.WriteLine("Menetlevél kész.");
+        }
+
+        private static void Feladat06()
         {
-            throw new NotImplementedException();
+            var groupingBySzemAz = adatok.GroupBy(a => a.SzemAz);
+
+            int absMax = 0;
+            string maxSzem = "";
+            foreach (var szemGroup in groupingBySzemAz)
+            {
+                int szemMax = 0;
+                int kezdo = 0, vegzo = 0;
+                int megtettTav = 0;
+                for (int i = 0; i < szemGroup.Count(); i++)
+                {
+                    var adat = szemGroup.ToList()[i];
+                    if (i % 2 == 0)
+                    {
+                        kezdo = adat.Km;
+                    }
+                    else
+                    {
+                        vegzo = adat.Km;
+                        megtettTav = vegzo - kezdo;
+                        if (megtettTav > szemMax)
+                        {
+                            szemMax = megtettTav;
+                        }
+                        
+                    }
+                }
+
+                if (szemMax > absMax)
+                {
+                    absMax = szemMax;
+                    maxSzem = szemGroup.Key;
+                }
+                
+            }
+            
+            Console.WriteLine($"Leghosszabb út: {absMax} km, személy: {maxSzem}");
+            
+        }
+
+        static void Feladat05()
+        {
+            var groupingOfAutok = adatok.GroupBy(a => a.Rendszam);
+
+            foreach (var group in groupingOfAutok)
+            {
+                int tav = group.Last().Km - group.First().Km;
+                Console.WriteLine($"{group.Key} {tav} km");
+            }
+        }
+
+        static void Feladat04()
+        {
+            int numOfKintAutok = adatok.GroupBy(a => a.Rendszam).Count(g =>g.Last().Ki);
+
+            Console.WriteLine($"A hónap végén {numOfKintAutok} autót nem hoztak vissza.");
         }
 
         static void Feladat03()
         {
             Console.Write("Nap: ");
-            int NapBe = int.Parse(Console.ReadLine());
+            int napBe = int.Parse(Console.ReadLine());
 
-            List<Jegyzek> szurtAdatok = adatok.Where(a => a.Nap == NapBe).ToList();
+            List<Jegyzek> szurtAdatok = adatok.Where(a => a.Nap == napBe).ToList();
             
-            Console.WriteLine($"Forgalom a(z) {NapBe}. napon:");
+            Console.WriteLine($"Forgalom a(z) {napBe}. napon:");
             foreach (var sza in szurtAdatok)
             {
                 string kibe = sza.Ki ? "ki" : "be";
